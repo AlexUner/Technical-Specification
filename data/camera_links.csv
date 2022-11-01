@@ -1,0 +1,12 @@
+camera_id,link
+1,rtsp://192.168.0.79:554/user=admin_password=admin
+1,rtsp://192.168.0.75:554/user=admin_password=admin
+1,rtsp://192.168.0.29:554/user=admin_password=admin
+2,rtsp://192.128.1.79:554/user=admin_password=admin
+2,rtsp://12.168.0.73:554/user=admin_password=admin
+2,rtsp://192.162.0.79:554/user=admin_password=admin
+2,rtsp://112.168.0.79:554/user=admin_password=admin
+2,rtsp://192.168.0.72:554/user=admin_password=admin
+3,rtsp://192.168.0.79:554/user=admin_password=admin
+4,rtsp://193.168.0.79:554/user=admin_password=admin
+4,rtsp://192.238.0.79:554/user=admin_password=admin

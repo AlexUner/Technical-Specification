@@ -1,0 +1,93 @@
+openapi: 3.0.0
+
+info:
+  title: JSON API for Cameras
+  version: "1"
+
+servers:
+  - url: http://localhost:80
+    description: local server
+
+paths:
+#  read
+  /api/v1/cameras:
+    get:
+      responses:
+        200:
+          description: List of Cameras
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    links:
+                      type: array
+                      items:
+                        type: string
+# create
+    post:
+      requestBody:
+        description: Data for new camera
+        content:
+          text/plain:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                links:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        200:
+          description: Number of added camera
+          content:
+            application/json:
+              schema:
+                type: integer
+# update
+  /api/v1/cameras/{camera_id}/update:
+    post:
+      parameters:
+        - name: camera_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        description: Edited Camera datamodel
+        content:
+          text/plain:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                links:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        200:
+          description: Successful response
+# delete
+  /api/v1/cameras/{camera_id}/remove:
+    post:
+      parameters:
+        - name: camera_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        200:
+          description: Successful response
