@@ -1,0 +1,2 @@
+C:\Users\alexa\Desktop\Technical Specification\front\obj\Debug\front.esproj.SuggestedBindingRedirects.cache
+C:\Users\alexa\Desktop\Technical Specification\front\obj\Debug\front.esproj.CoreCompileInputs.cache
