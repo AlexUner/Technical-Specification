@@ -46,10 +46,10 @@ private:
     public:
         API(DB *CRUDDB);
 
-        bool Create();
-        bool Read();
-        bool Update();
-        bool Delete();
+        bool Read(string reqUrl);
+        bool Create(string reqUrl);
+        bool Update(string reqUrl);
+        bool Delete(string reqUrl);
 
     private:
         DB* CRUDDB;

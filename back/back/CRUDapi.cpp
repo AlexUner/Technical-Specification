@@ -62,6 +62,7 @@ void CRUDapi::DB::DBdisconnect()
 
 bool CRUDapi::DB::DBsetSchema(string schemaName)
 {
+    //catch errors!!!
     connProps.con->setSchema(schemaName);
 }
 
@@ -75,10 +76,19 @@ bool CRUDapi::DB::tsql(string transact)
 
     connProps.stmt->execute(transact);
 
+    //catch errors!!!
+
     return true;
 }
 //==============================================================================
 CRUDapi::API::API(DB* CRUDDB)
 {
     this->CRUDDB = CRUDDB;
+}
+
+bool CRUDapi::API::Read(string reqUrl)
+{
+    CRUDDB->tsql();
+
+    return true;
 }

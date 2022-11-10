@@ -10,7 +10,8 @@ int main()
 
     CRUDapi api("tcp://127.0.0.1:3306", "root", "root");
 
-    api.api->Create();
+    api.CRUDDB.DBsetSchema("mysql");
+    api.api->Read("127.0.0.1");
 
 
 }
