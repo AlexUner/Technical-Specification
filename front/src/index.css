@@ -71,7 +71,7 @@ body {
     display: flex;
 }
 
-#create::before {
+.create::before {
     content: '';
     background-image: url("/public/akar-icons_plus.png");
     background-size: contain;
@@ -82,10 +82,13 @@ body {
     margin-left: -30px;
 }
 
-#create {
+.create {
     background: #30ce5f;
-    color: #2f3bc6;
-    padding-left: 30px;
+    color: #1b1e4a;
+}
+
+.create:hover {
+    box-shadow: 0 0 5px #30ce5f;
 }
 
 .edit::before {
@@ -105,9 +108,13 @@ body {
     padding-left: 30px;
 }
 
+.edit:hover {
+    box-shadow: 0 0 5px #0c1556;
+}
+
 .delete::before {
     content: '';
-    background-image: url("/public/akar-icons_plus.png");
+    background-image: url("/public/akar-icons_minus.png");
     background-size: contain;
     transform: scaleX(-1);
     position: absolute;
@@ -118,8 +125,12 @@ body {
 
 .delete {
     background: #f34848;
-    color: #2f3bc6;
+    color: #1b1e4a;
     padding-left: 30px;
+}
+
+.delete:hover {
+    box-shadow: 0 0 5px #f34848;
 }
 
 .button {
@@ -136,4 +147,47 @@ body {
 .list-item__link {
     text-decoration: none;
     color: inherit;
+    position: relative;
+}
+
+.list-item__link:after {
+    left: 0;
+    width: 0;
+    display: block;
+    position: absolute;
+    height: 2px;
+    background-color: #000000;
+    content: "";
+    transition: width 0.3s ease-out;
+}
+
+.list-item__link:hover:after,
+.list-item__link:focus:after {
+    width: 100%;
+}
+
+.dark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #00000050;
+}
+
+.hidden {
+    display: none;
+}
+
+.createCamera {
+    background: #fff;
+    position: absolute;
+}
+
+.closeBtn {
+    background-image: url("/public/akar-icons_minus.png");
+}
+
+.createWindow-header {
+
 }

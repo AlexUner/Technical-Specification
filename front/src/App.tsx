@@ -1,6 +1,7 @@
-import React from 'react';
+﻿import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { JSX_TYPES } from '@babel/types';
 
 function App() {
 
@@ -9,25 +10,33 @@ function App() {
     return (
         <>
             <div className="UInterface">
+
                 <div className="App-header">
-                    <div className="button" id="create" onClick={createWindow}>Create</div>
+                    <CameraFormBtn name={'create'}/>
+                    
                 </div>
 
                 <div className="table">
                     <div className="table__header">
-                        <p>#</p>
-                        <p>Name</p>
-                        <p>List of links</p>
-                        <p>Interaction</p>
+
+                        <p>№</p>
+                        <p>Название</p>
+                        <p>Список ссылок</p>
+                        <p>Взаимодействие</p>
+
                     </div>
 
                     <ul className="table__list">
-                        {arr.map((cnt) => <ListItem cnt={cnt} name={'Camera ' + cnt} href={'https://yandex.ru'} />)}
+                        {arr.map((cnt) => <ListItem cnt={cnt} name={'Камера ' + cnt} href={'https://yandex.ru'} />)}
                     </ul>
                 </div>
+
             </div>
 
-            <CreateCameraForm />
+            <div className="dark hidden"></div>
+            <CameraForm name={'create'} />
+            <CameraForm name={'edit'} />
+            <CameraForm name={'delete'} />
         </>
     );
 }
@@ -36,73 +45,127 @@ function App() {
 function ListItem(props: any) {
     return (
         <li className="list-item">
+
             <div className="list-item__cnt">{props.cnt}</div>
+
             <div className="list-item__name">{props.name}</div>
+
             <div className="list-item__links">
                 <a className="list-item__link" target="_blank" href={props.href}>{props.href}</a>
             </div>
+
             <div className="list-item__btns">
-                <div className="button edit">Edit</div>
-                <div className="button delete">Delete</div>
+                <CameraFormBtn name={'edit'} />
+
+                <CameraFormBtn name={'delete'} />
             </div>
+
         </li>
     );
 }
 
-function createWindow() {
-    document.getElementById('dark')?.classList.add("active");
-}
 
-function createCamera() {
+class CameraFormBtn extends React.Component<{ name: string }>{
 
-}
-
-class CreateCameraForm extends React.Component<{}, { value: string }>{
     constructor(props: any) {
         super(props);
-        this.state = { value: '' };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.ShowWindow = this.ShowWindow.bind(this);
     }
 
-    handleChange(event: any) {
-        this.setState({ value: event.target.value });
-    }
-
-    handleSubmit(event: any) {
-        alert('������������ ���: ' + this.state.value);
-        event.preventDefault();
+    ShowWindow()
+    {
+        document.getElementsByClassName('dark')[0]?.classList.remove('hidden');
+        document.getElementsByClassName(this.props.name+'Camera')[0]?.classList.remove('hidden');
     }
 
     render() {
+        var btnName = '';
+
+        switch (this.props.name) {
+
+            case 'edit':
+                btnName = 'Изменить';
+                break;
+
+            case 'delete':
+                btnName = 'Удалить';
+                break;
+
+            case 'create':
+                btnName = 'Создать';
+                break;
+        }
+
         return (
-            /*<form onSubmit={this.handleSubmit}>
-                <label>
-                    ���:
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
-                </label>
-                <input type="submit" value="���������" />
-            </form>*/
-
-            <div className="dark">
-                <form className="createWindow" onSubmit={this.handleSubmit}>
-                    <div className="createWindow__title">Creating the camera</div>
-
-                    <div className="createWindow__cameraName">
-                        <div className="cameraName__title">Camera name</div>
-                        <input type="text" className="cameraName__input" value={this.state.value} onChange={this.handleChange} />
-                    </div>
-
-                    <div className="createWindow__cameraHref">
-
-                    </div>
-
-                    <div className="createWindow__cameraBtns"></div>
-                </form>
-            </div>
+            <div className={"button " + this.props.name} onClick={this.ShowWindow}>{btnName}</div>
         );
     }
+}
+
+class CameraForm extends React.Component<{ name: string }>{
+    constructor(props: any) {
+        super(props);
+    }
+
+    render() {
+        
+        var FormType;
+
+        switch (this.props.name) {
+
+            case 'edit':
+                FormType = EditForm();
+                break;
+
+            case 'delete':
+                FormType = DeleteComfirmForm();
+                break;
+
+            case 'create':
+                FormType = CreateForm();
+                break;
+        }
+
+        return (FormType);
+    }
+}
+
+function CreateForm() {
+    return (
+        <form className="createCamera hidden">
+
+            <div className="createWindow-header">
+                <div className="windowTitle">Создание камеры</div>
+
+                <div className="closeBtn"></div>
+            </div>
+
+            <div className="createWindow__cameraName">
+                <div className="cameraName inputTitle">Название камеры</div>
+                <input type="text" className="cameraName__input" />
+            </div>
+
+            <div className="createWindow__cameraHref">
+
+            </div>
+
+            <div className="createWindow__cameraBtns"></div>
+
+        </form>
+    );  
+}
+
+function EditForm() {
+    return (
+        <></>  
+    );
+}
+
+function DeleteComfirmForm() {
+    return (
+        <></>
+    );
 }
 
 export default App;
